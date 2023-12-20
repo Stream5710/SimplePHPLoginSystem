@@ -10,6 +10,7 @@ services:
     image: mysql:8.2.0
     volumes:
       - ./mysql:/var/lib/mysql
+      - ./seed:/docker-entrypoint-initdb.d
     restart: on-failure
     environment:
       - MYSQL_ROOT_PASSWORD=root
