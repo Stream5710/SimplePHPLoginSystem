@@ -2,6 +2,7 @@ services:
   php:
     build: ./php_build
     volumes:
+      - ./php_build/php.ini:/usr/local/etc/php/php.ini
       - ./html:/var/www/html
     ports:
       - 3000:80
