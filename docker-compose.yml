@@ -1,8 +1,7 @@
 services:
   php:
-    image: php:8.3-apache
+    build: ./php_build
     volumes:
-      - ./php.ini:/usr/local/etc/php/php.ini
       - ./html:/var/www/html
     ports:
       - 3000:80

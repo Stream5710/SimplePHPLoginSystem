@@ -1,8 +1,8 @@
 USE test;
 GRANT ALL PRIVILEGES ON *.* TO 'test';
-DROP USER IF EXISTS 'connector'@'%';
-CREATE USER 'connector'@'%' IDENTIFIED BY '12345';
-GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO 'connector';
+DROP USER IF EXISTS 'connector'@'localhost';
+CREATE USER 'connector'@'localhost' IDENTIFIED BY '12345';
+GRANT SELECT, INSERT, UPDATE, DELETE ON test.* TO 'connector'@'localhost';
 FLUSH PRIVILEGES;
 
 DROP TABLE IF EXISTS users;
