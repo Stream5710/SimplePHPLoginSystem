@@ -5,5 +5,5 @@ $_SESSION = array();
 // セッションを破棄
 session_destroy();
 
-header('location: login.php', true, 301);
+header('location: index.php', true, 301);
 ?>
