@@ -1,11 +1,19 @@
 <?php
 session_start();
-if (isset($_SESSION['id'])) {
-    $username = htmlspecialchars($_SESSION['first_name'], \ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($_SESSION['last_name'], \ENT_QUOTES, 'UTF-8');
-    $msg = 'ようこそ ' . $username . ' さん';
-} else {
+if (!isset($_SESSION['id'])) {
     header('location: login.php', true, 301);
     exit();
+} else {
+    $username = htmlspecialchars($_SESSION['first_name'], \ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($_SESSION['last_name'], \ENT_QUOTES, 'UTF-8');
+    $msg = 'ようこそ ' . $username . ' さん';
+
+    require_once('dbconnect.php');
+    $sql = 'SELECT id, first_name, last_name FROM users';
+    $stmt = $dbh->prepare($sql);
+    // SQLを実行
+    $stmt->execute();
+
+    $users = $stmt->fetchAll();
 }
 ?>
 
@@ -18,6 +26,14 @@ if (isset($_SESSION['id'])) {
 </head>
 <body>
     <h1><?php echo $msg; ?></h1>
+    <div>
+        <h2>ユーザー一覧</h2>
+        <ul>
+            <?php foreach ($users as $user) : ?>
+                <li><?php echo $user['id'] . ': ' . htmlspecialchars($user['first_name'], \ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($user['last_name'], \ENT_QUOTES, 'UTF-8'); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
     <a href="logout.php">ログアウト</a>
 </body>
 </html>
