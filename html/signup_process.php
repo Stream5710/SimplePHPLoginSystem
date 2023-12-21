@@ -4,7 +4,7 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 // パスワードをハッシュ化
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$password_hash = password_hash(htmlspecialchars($_POST['password'], \ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT);
 
 // メールアドレスが既に登録されていないかチェック
 $sql = 'SELECT * FROM users WHERE email = :email';
@@ -19,13 +19,13 @@ if ($member['email'] === $email) {
     $msg = 'このメールアドレスは既に登録されています。';
     $link = '<a href="signup.php">戻る</a>';
 } else {
-    $sql = 'INSERT INTO users (first_name, last_name, email, password) VALUES (:first_name, :last_name, :email, :password)';
+    $sql = 'INSERT INTO users (first_name, last_name, email, pass) VALUES (:first_name, :last_name, :email, :pass)';
     $stmt = $dbh->prepare($sql);
     // 値をバインド
     $stmt->bindValue(':first_name', $first_name, PDO::PARAM_STR);
     $stmt->bindValue(':last_name', $last_name, PDO::PARAM_STR);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+    $stmt->bindValue(':pass', $password_hash, PDO::PARAM_STR);
     // SQLを実行
     $stmt->execute();
     $msg = '会員登録が完了しました。';

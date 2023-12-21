@@ -3,7 +3,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'test';
 GRANT GRANT OPTION ON *.* TO 'test';
 DROP USER IF EXISTS 'connector'@'%';
 CREATE USER 'connector'@'%' IDENTIFIED BY 'abcde';
-GRANT SELECT, INSERT, UPDATE, DELETE ON 'test'.* TO 'connector'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON test.* TO 'connector'@'%';
 FLUSH PRIVILEGES;
 
 DROP TABLE IF EXISTS users;
@@ -12,8 +12,8 @@ CREATE TABLE users (
     id BIGINT NOT NULL AUTO_INCREMENT,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
-    email VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL,
+    email VARCHAR(512) UNIQUE NOT NULL,
+    pass VARCHAR(512) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );

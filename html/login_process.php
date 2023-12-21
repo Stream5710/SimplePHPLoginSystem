@@ -11,7 +11,7 @@ $stmt->bindValue(':email', $email, PDO::PARAM_STR);
 $stmt->execute();
 
 $member = $stmt->fetch();
-if (password_verify($_POST['password'], $member['password'])) {
+if (password_verify($_POST['password'], $member['pass'])) {
     $_SESSION['id'] = $member['id'];
     $_SESSION['first_name'] = $member['first_name'];
     $_SESSION['last_name'] = $member['last_name'];
