@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['userid'])) {
     header('location: login.php', true, 301);
     exit();
 } else {
@@ -8,7 +8,7 @@ if (!isset($_SESSION['id'])) {
     $msg = 'ようこそ ' . $username . ' さん';
 
     require_once('dbconnect.php');
-    $sql = 'SELECT id, first_name, last_name FROM users';
+    $sql = 'SELECT userid, first_name, last_name FROM users';
     $stmt = $dbh->prepare($sql);
     // SQLを実行
     $stmt->execute();
@@ -30,7 +30,7 @@ if (!isset($_SESSION['id'])) {
         <h2>ユーザー一覧</h2>
         <ul>
             <?php foreach ($users as $user) : ?>
-                <li><?php echo $user['id'] . ': ' . htmlspecialchars($user['first_name'], \ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($user['last_name'], \ENT_QUOTES, 'UTF-8'); ?></li>
+                <li><?php echo $user['userid'] . ': ' . htmlspecialchars($user['first_name'], \ENT_QUOTES, 'UTF-8') . ' ' . htmlspecialchars($user['last_name'], \ENT_QUOTES, 'UTF-8'); ?></li>
             <?php endforeach; ?>
         </ul>
     </div>

@@ -1,6 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
+// ログインしていなければログインページへリダイレクト
+if (!isset($_SESSION['userid'])) {
     header('location: login.php', true, 301);
     exit();
 } else {

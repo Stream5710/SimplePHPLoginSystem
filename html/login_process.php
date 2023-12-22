@@ -11,8 +11,9 @@ $stmt->bindValue(':email', $email, PDO::PARAM_STR);
 $stmt->execute();
 
 $member = $stmt->fetch();
+// パスワードが一致したらログイン
 if (password_verify($_POST['password'], $member['pass'])) {
-    $_SESSION['id'] = $member['id'];
+    $_SESSION['userid'] = $member['userid'];
     $_SESSION['first_name'] = $member['first_name'];
     $_SESSION['last_name'] = $member['last_name'];
     header('location: index.php', true, 301);
