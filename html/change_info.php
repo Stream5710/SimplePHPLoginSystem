@@ -5,6 +5,7 @@ if (!isset($_SESSION['userid'])) {
     header('location: login.php', true, 301);
     exit();
 } else {
+    // セッション変数から値を取得
     $first_name = htmlspecialchars($_SESSION['first_name'], \ENT_QUOTES, 'UTF-8');
     $last_name = htmlspecialchars($_SESSION['last_name'], \ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($_SESSION['email'], \ENT_QUOTES, 'UTF-8');

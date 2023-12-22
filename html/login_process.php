@@ -1,6 +1,7 @@
 <?php
 require_once('dbconnect.php');
 session_start();
+// フォームからの値を取得
 $email = $_POST['email'];
 
 $sql = 'SELECT * FROM users WHERE email = :email';
@@ -13,10 +14,12 @@ $stmt->execute();
 $member = $stmt->fetch();
 // パスワードが一致したらログイン
 if (isset($member['userid']) && $_POST['password'] && password_verify($_POST['password'], $member['pass'])) {
+    // セッション変数に値を保存
     $_SESSION['userid'] = $member['userid'];
     $_SESSION['first_name'] = $member['first_name'];
     $_SESSION['last_name'] = $member['last_name'];
     $_SESSION['email'] = $member['email'];
+    // ログイン完了後にindex.phpに遷移
     header('location: index.php', true, 301);
     exit();
 } else {
