@@ -12,10 +12,11 @@ $stmt->execute();
 
 $member = $stmt->fetch();
 // パスワードが一致したらログイン
-if (password_verify($_POST['password'], $member['pass'])) {
+if (isset($member['userid']) && $_POST['password'] && password_verify($_POST['password'], $member['pass'])) {
     $_SESSION['userid'] = $member['userid'];
     $_SESSION['first_name'] = $member['first_name'];
     $_SESSION['last_name'] = $member['last_name'];
+    $_SESSION['email'] = $member['email'];
     header('location: index.php', true, 301);
     exit();
 } else {

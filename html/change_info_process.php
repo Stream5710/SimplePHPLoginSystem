@@ -31,6 +31,12 @@ if (!isset($_SESSION['userid'])) {
             // SQLを実行
             $stmt->execute();
         }
+
+        // セッション変数を更新
+        $_SESSION['first_name'] = $_POST['first_name'];
+        $_SESSION['last_name'] = $_POST['last_name'];
+        $_SESSION['email'] = $_POST['email'];
+
         $msg = 'ユーザー情報の変更が完了しました。';
         $link = '<a href="index.php">ホームに戻る</a>';
     } catch (PDOException $e) {

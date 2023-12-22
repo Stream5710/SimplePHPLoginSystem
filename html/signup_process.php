@@ -15,7 +15,9 @@ $stmt->bindValue(':email', $email, PDO::PARAM_STR);
 $stmt->execute();
 
 $member = $stmt->fetch();
-if ($member['email'] === $email) {
+
+// メールアドレスが既に登録されている場合はエラー
+if ($member !== false && $member['email'] === $email) {
     $msg = 'このメールアドレスは既に登録されています。';
     $link = '<a href="signup.php">戻る</a>';
 } else {

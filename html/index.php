@@ -34,6 +34,8 @@ if (!isset($_SESSION['userid'])) {
             <?php endforeach; ?>
         </ul>
     </div>
+    <a href="change_info.php">ユーザー情報変更</a>
+    <a href="delete.php">このアカウントを削除</a>
     <a href="logout.php">ログアウト</a>
 </body>
 </html>
